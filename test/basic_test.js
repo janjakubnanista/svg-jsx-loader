@@ -6,6 +6,7 @@ var expect = require('expect.js');
 var utils = require('./utils');
 var loader = require('../index.js');
 
+/* global describe, it */
 describe('svg-jsx-loader', function() {
     it('should convert attributes to camelCase', function(done) {
         var executor = new utils.Executor(loader);
