@@ -60,11 +60,13 @@ function buildSVG(object) {
 }
 
 function buildJSX(svg) {
-    // Style attribute has to be treated differently
-    // See https://facebook.github.io/react/tips/inline-styles.html
-    return svg.replace(/style="(.*?)"/g, function(match, styleString) {
-        return 'style={' + utils.styleAttribute(styleString) + '}';
-    });
+    return svg
+        // Style attribute has to be treated differently
+        // See https://facebook.github.io/react/tips/inline-styles.html
+        .replace(/style="(.*?)"/g, function(match, styleString) {
+            return 'style={' + utils.styleAttribute(styleString) + '}';
+        })
+        .replace(/^<svg/, '<svg {...this.props}');
 }
 
 function buildComponent(svg, es6) {

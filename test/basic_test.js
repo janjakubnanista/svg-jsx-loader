@@ -18,7 +18,7 @@ describe('svg-jsx-loader', function() {
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -36,7 +36,7 @@ describe('svg-jsx-loader', function() {
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1"/>);\n' +
+                '        return (<svg {...this.props} version="1.1"/>);\n' +
                 '    }\n});\n'
             );
 
@@ -54,7 +54,7 @@ describe('svg-jsx-loader', function() {
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n</svg>);\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -72,7 +72,7 @@ describe('svg-jsx-loader', function() {
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1">\n\t<polygon className="class"/>\n</svg>);\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<polygon className="class"/>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -90,7 +90,7 @@ describe('svg-jsx-loader', function() {
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1">\n\t<text style={{"fontFamily":"Verdana","fontSize":"25px"}} x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<text style={{"fontFamily":"Verdana","fontSize":"25px"}} x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -110,7 +110,7 @@ describe('svg-jsx-loader', function() {
                 'import { Component } from \'react\';\n\n' +
                 'export default class extends Component {\n' +
                 '    render() {\n' +
-                '        return (<svg version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n'
             );
