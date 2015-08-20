@@ -7,28 +7,52 @@ var fs = require('fs');
 var path = require('path');
 var utils = require('./utils');
 
-// Passed to xml2js parser as a validator option
-// It is executed for every tag and normalizes its attributes
-function xml2jsValidator(xpath, c, element) {
-    element.$ = utils.normalizeAttributes(element.$ || {});
+function findTagById(id, element) {
+    if (element.$ && element.$.id === id) return element;
+
+    var children = element.$$ || [];
+    return children.map(findTagById.bind(null, id)).filter(Boolean).shift();
+}
+
+function replaceUseTags(element, root) {
+    if (!element.$$) return element;
+
+    element.$$ = element.$$.map(function(child) {
+        var tagName = child['#name'];
+        if (tagName === 'use') {
+            var link = child.$['xlink:href'] || '';
+            var id = link.replace(/^#/, '');
+
+            return findTagById(id, root) || child;
+        }
+
+        return replaceUseTags(child, root || element);
+    });
 
     return element;
 }
 
-function normalizeElement(element) {
+function normalizeElement(element, options) {
     var wrapper = {};
     var tagName = element['#name'];
     var textContext = element._;
 
+    if (options.replaceUseTags) {
+        element = replaceUseTags(element);
+    }
+
     // Normalize all the children
-    var children = element.$$ && element.$$.filter(utils.isTagAllowed).map(normalizeElement);
+    var children = element.$$ && element.$$
+        .filter(utils.isTagAllowed)
+        .map(normalizeElement);
 
     // Prefix all attributes with @ for xmlbuilder
-    var attributes = Object.keys(element.$ || {}).reduce(function(hash, name) {
-        hash['@' + name] = element.$[name];
+    var attributes = Object.keys(utils.normalizeAttributes(element.$ || {}))
+        .reduce(function(hash, name) {
+            hash['@' + name] = element.$[name];
 
-        return hash;
-    }, {});
+            return hash;
+        }, {});
 
     if (textContext) attributes['#text'] = textContext;
     if (children && children.length) attributes['#list'] = children;
@@ -48,8 +72,7 @@ function parseSVG(string, callback) {
         normalize: true,
         normalizeTags: true,
         preserveChildrenOrder: true,
-        attrNameProcessors: [utils.camelCase],
-        validator: xml2jsValidator
+        attrNameProcessors: [utils.camelCase]
     }, callback);
 }
 
@@ -86,7 +109,8 @@ module.exports = function svgJsxLoader(source) {
     parseSVG(source, function(error, result) {
         if (error) return callback(error);
 
-        var normalized = normalizeElement(result);
+        var normalized = normalizeElement(result, options);
+
         var svg = buildSVG(normalized);
         var jsx = buildJSX(svg);
         var component = buildComponent(jsx, options.es6);
