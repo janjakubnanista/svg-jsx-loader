@@ -1,0 +1,2 @@
+build/**/*
+src/js/polyfills/**/*.js
