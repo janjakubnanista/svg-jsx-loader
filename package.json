@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "loader-utils": "^0.2.11",
+    "object-assign": "^4.0.1",
     "xml2js": "^0.4.10",
     "xmlbuilder": "^2.6.4"
   }

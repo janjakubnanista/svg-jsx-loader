@@ -5,6 +5,7 @@ var parseString = require('xml2js').parseString;
 var xmlbuilder = require('xmlbuilder');
 var fs = require('fs');
 var path = require('path');
+var assign = require('object-assign');
 var utils = require('./utils');
 
 function findTagById(id, element) {
@@ -22,8 +23,15 @@ function replaceUseTags(element, root) {
         if (tagName === 'use') {
             var link = child.$['xlink:href'] || '';
             var id = link.replace(/^#/, '');
+            var replacement = findTagById(id, root);
 
-            return findTagById(id, root) || child;
+            if (replacement) {
+                replacement = assign({}, replacement);
+
+                replacement.$ && delete replacement.$.id;
+            }
+
+            return replacement || child;
         }
 
         return replaceUseTags(child, root || element);
