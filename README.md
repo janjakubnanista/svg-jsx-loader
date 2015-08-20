@@ -2,6 +2,8 @@
 
 [Webpack](http://webpack.github.io/) loader that allows you to load your SVG files as [React](http://facebook.github.io/react/) components.
 
+[![Build Status](https://travis-ci.org/janjakubnanista/svg-jsx-loader.svg?branch=master)](https://travis-ci.org/janjakubnanista/svg-jsx-loader)
+
 ## Installation
 
     npm install svg-jsx-loader
@@ -40,7 +42,7 @@ Suppose you have an SVG file with following structure:
     <g id="group" clip-path="url(#mask)">
     	<!-- Group contents -->
     </g>
-    
+
 Then of course React won't support `<use/>` tags and you end up unmasked `#group`. By trading off the resulting component size you can set `replaceUseTags` to `true` and end up with follwoing structure which is supported by React:
 
 	<polygon id="mask-path" points="497,129 537.1,135.3 494.4,215.8"/>
