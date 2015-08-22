@@ -7,7 +7,13 @@ var ALLOWED_ATTRIBUTES = ALLOWED_HTML_ATTRIBUTES.concat(ALLOWED_SVG_ATTRIBUTES);
 var ALLOWED_TAGS = 'circle clipPath defs ellipse g line linearGradient mask path pattern polygon polyline radialGradient rect stop svg text tspan'.toLowerCase().split(' ');
 
 exports.camelCase = function(string) {
-    return string.replace(/-([a-z])/g, function(g) { return g[1].toUpperCase(); });
+    return string.replace(/(?:-|_)([a-z])/g, function(g) { return g[1].toUpperCase(); });
+};
+
+exports.className = function(string) {
+    var camelCase = exports.camelCase(string);
+
+    return camelCase[0].toUpperCase() + camelCase.slice(1);
 };
 
 exports.normalizeAttributes = function(attributes) {

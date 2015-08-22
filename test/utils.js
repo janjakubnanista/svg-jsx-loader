@@ -21,6 +21,8 @@ exports.Executor = function(loader) {
     this.loader = loader;
 };
 
+exports.Executor.prototype.resourcePath = '/path/to/input-filename.svg';
+
 exports.Executor.prototype.execute = function(input, callback) {
     this.__callback = callback;
 

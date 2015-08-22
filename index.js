@@ -107,6 +107,10 @@ module.exports = function svgJsxLoader(source) {
 
     var callback = this.async();
     var options = loaderUtils.parseQuery(this.query);
+    var fileName = path.basename(this.resourcePath, '.svg');
+    var className = utils.className(fileName);
+
+    options.displayName = 'displayName' in options ? options.displayName : className;
 
     parseSVG(source, function(error, result) {
         if (error) return callback(error);
