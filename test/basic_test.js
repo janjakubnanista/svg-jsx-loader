@@ -17,6 +17,28 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
+                '    render: function() {\n' +
+                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '    }\n});\n'
+            );
+
+            done();
+        });
+    });
+
+    it('should use displayName query parameter', function(done) {
+        var executor = new utils.Executor(loader);
+        var input = utils.input('simplest');
+
+        executor.query = '?displayName=MyComponent';
+
+        executor.execute(input, function(error, output) {
+            expect(error).to.be(null);
+            expect(output).to.be(
+                'var React = require(\'react\');\n\n' +
+                'module.exports = React.createClass({\n' +
+                '    displayName: "MyComponent",\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
@@ -35,6 +57,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1"/>);\n' +
                 '    }\n});\n'
@@ -53,6 +76,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n</svg>);\n' +
                 '    }\n});\n'
@@ -71,6 +95,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon className="class"/>\n</svg>);\n' +
                 '    }\n});\n'
@@ -89,6 +114,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<text style={{"fontFamily":"Verdana","fontSize":"25px"}} x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
@@ -109,6 +135,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'import React from \'react\';\n\n' +
                 'export default class extends React.Component {\n' +
+                '    displayName: null\n' +
                 '    render() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
@@ -130,6 +157,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon points="497,129 537.1,135.3 494.4,215.8"/>\n\t<clippath id="path">\n\t\t<polygon points="497,129 537.1,135.3 494.4,215.8"/>\n\t</clippath>\n</svg>);\n' +
                 '    }\n});\n'
@@ -150,6 +178,7 @@ describe('svg-jsx-loader', function() {
             expect(output).to.be(
                 'var React = require(\'react\');\n\n' +
                 'module.exports = React.createClass({\n' +
+                '    displayName: null,\n' +
                 '    render: function() {\n' +
                 '        return (<svg {...this.props} version="1.1">\n\t<polygon id="Glue_mask" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<clippath id="path"/>\n</svg>);\n' +
                 '    }\n});\n'

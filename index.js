@@ -8,13 +8,6 @@ var path = require('path');
 var assign = require('object-assign');
 var utils = require('./utils');
 
-function findTagById(id, element) {
-    if (element.$ && element.$.id === id) return element;
-
-    var children = element.$$ || [];
-    return children.map(findTagById.bind(null, id)).filter(Boolean).shift();
-}
-
 function replaceUseTags(element, root) {
     if (!element.$$) return element;
 
@@ -23,7 +16,7 @@ function replaceUseTags(element, root) {
         if (tagName === 'use') {
             var link = child.$['xlink:href'] || '';
             var id = link.replace(/^#/, '');
-            var replacement = findTagById(id, root);
+            var replacement = utils.findTagById(id, root);
 
             if (replacement) {
                 replacement = assign({}, replacement);
@@ -100,12 +93,13 @@ function buildJSX(svg) {
         .replace(/^<svg/, '<svg {...this.props}');
 }
 
-function buildComponent(svg, es6) {
-    var type = es6 ? 'es6' : 'es5';
+function buildComponent(svg, options) {
+    var type = options.es6 ? 'es6' : 'es5';
+    var name = options.displayName || null;
     var templateFilename = path.resolve(__dirname, 'templates', type) + '.js.tpl';
     var template = fs.readFileSync(templateFilename).toString('utf8');
 
-    return template.replace('{SVG}', svg);
+    return template.replace('{SVG}', svg).replace('{NAME}', JSON.stringify(name));
 }
 
 module.exports = function svgJsxLoader(source) {
@@ -121,7 +115,7 @@ module.exports = function svgJsxLoader(source) {
 
         var svg = buildSVG(normalized);
         var jsx = buildJSX(svg);
-        var component = buildComponent(jsx, options.es6);
+        var component = buildComponent(jsx, options);
 
         callback(null, component);
     });

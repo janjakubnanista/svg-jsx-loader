@@ -40,3 +40,10 @@ exports.styleAttribute = function(string) {
 
     return JSON.stringify(object);
 };
+
+exports.findTagById = function(id, element) {
+    if (element.$ && element.$.id === id) return element;
+
+    var children = element.$$ || [];
+    return children.map(exports.findTagById.bind(null, id)).filter(Boolean).shift();
+};

@@ -28,10 +28,12 @@ In case you are using [ES6](#es6) variant, you have to chain a transpiler after 
 
 ## Options
 
-<a name="es6"></a> `es6` Use ES6 compatible JavaScript syntax. Defaults to `false`.
+<a name="es6"></a> `es6` *{Boolean}* Use ES6 compatible JavaScript syntax for component class. Defaults to `false`.
 
-`replaceUseTags` Replace `<use/>` tags with referenced elements. Element that is referenced by `<use/>` tag's `xlink:href` attribute is looked up, it's `id`
-is discarded and it replaces the original `<use/>` tag. This is useful when exporting from Illustrator.
+`displayName` *{String}* `displayName` of generated class. Defaults to `null`.
+
+`replaceUseTags` *{Boolean}* Replace `<use/>` tags with referenced elements. Element that is referenced by `<use/>` tag's `xlink:href` attribute is looked up, it's `id`
+is discarded and it replaces the original `<use/>` tag. This is useful when exporting from Illustrator. Defaults to `false`.
 
 Suppose you have an SVG file with following structure:
 
