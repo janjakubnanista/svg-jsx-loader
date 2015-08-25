@@ -1,8 +1,9 @@
 import React from 'react';
 
-export default class extends React.Component {
-    displayName: {NAME}
+export default class {CLASSNAME} extends React.Component {
     render() {
         return ({SVG});
     }
 };
+
+{CLASSNAME}.displayName = {DISPLAYNAME};

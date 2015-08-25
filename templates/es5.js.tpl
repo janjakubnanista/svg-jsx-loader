@@ -1,7 +1,7 @@
 var React = require('react');
 
 module.exports = React.createClass({
-    displayName: {NAME},
+    displayName: {DISPLAYNAME},
     render: function() {
         return ({SVG});
     }

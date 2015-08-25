@@ -95,11 +95,13 @@ function buildJSX(svg) {
 
 function buildComponent(svg, options) {
     var type = options.es6 ? 'es6' : 'es5';
-    var name = options.displayName || null;
     var templateFilename = path.resolve(__dirname, 'templates', type) + '.js.tpl';
     var template = fs.readFileSync(templateFilename).toString('utf8');
 
-    return template.replace('{SVG}', svg).replace('{NAME}', JSON.stringify(name));
+    return template
+        .replace(/{SVG}/g, svg)
+        .replace(/{DISPLAYNAME}/g, JSON.stringify(options.displayName))
+        .replace(/{CLASSNAME}/g, options.displayName);
 }
 
 module.exports = function svgJsxLoader(source) {
@@ -108,9 +110,11 @@ module.exports = function svgJsxLoader(source) {
     var callback = this.async();
     var options = loaderUtils.parseQuery(this.query);
     var fileName = path.basename(this.resourcePath, '.svg');
-    var className = utils.className(fileName);
+    var displayName = utils.camelCase(fileName);
 
-    options.displayName = 'displayName' in options ? options.displayName : className;
+    options = assign({}, {
+        displayName: displayName
+    }, options);
 
     parseSVG(source, function(error, result) {
         if (error) return callback(error);
