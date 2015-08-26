@@ -8,25 +8,6 @@ var loader = require('../index.js');
 
 /* global describe, it */
 describe('svg-jsx-loader', function() {
-    it('should convert attributes to camelCase', function(done) {
-        var executor = new utils.Executor(loader);
-        var input = utils.input('simplest');
-
-        executor.execute(input, function(error, output) {
-            expect(error).to.be(null);
-            expect(output).to.be(
-                'var React = require(\'react\');\n\n' +
-                'module.exports = React.createClass({\n' +
-                '    displayName: "inputFilename",\n' +
-                '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
-                '    }\n});\n'
-            );
-
-            done();
-        });
-    });
-
     it('should use displayName query parameter when set to string value', function(done) {
         var executor = new utils.Executor(loader);
         var input = utils.input('simplest');
@@ -40,7 +21,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "MyComponent",\n' +
                 '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -61,83 +42,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: null,\n' +
                 '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
-                '    }\n});\n'
-            );
-
-            done();
-        });
-    });
-
-    it('should discard unsupported tags', function(done) {
-        var executor = new utils.Executor(loader);
-        var input = utils.input('not_allowed_tags');
-
-        executor.execute(input, function(error, output) {
-            expect(error).to.be(null);
-            expect(output).to.be(
-                'var React = require(\'react\');\n\n' +
-                'module.exports = React.createClass({\n' +
-                '    displayName: "inputFilename",\n' +
-                '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1"/>);\n' +
-                '    }\n});\n'
-            );
-
-            done();
-        });
-    });
-
-    it('should discard unsupported attributes', function(done) {
-        var executor = new utils.Executor(loader);
-        var input = utils.input('not_allowed_attributes');
-
-        executor.execute(input, function(error, output) {
-            expect(error).to.be(null);
-            expect(output).to.be(
-                'var React = require(\'react\');\n\n' +
-                'module.exports = React.createClass({\n' +
-                '    displayName: "inputFilename",\n' +
-                '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n</svg>);\n' +
-                '    }\n});\n'
-            );
-
-            done();
-        });
-    });
-
-    it('should rename class attribute to className', function(done) {
-        var executor = new utils.Executor(loader);
-        var input = utils.input('className');
-
-        executor.execute(input, function(error, output) {
-            expect(error).to.be(null);
-            expect(output).to.be(
-                'var React = require(\'react\');\n\n' +
-                'module.exports = React.createClass({\n' +
-                '    displayName: "inputFilename",\n' +
-                '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon className="class"/>\n</svg>);\n' +
-                '    }\n});\n'
-            );
-
-            done();
-        });
-    });
-
-    it('should convert style attribute', function(done) {
-        var executor = new utils.Executor(loader);
-        var input = utils.input('styles');
-
-        executor.execute(input, function(error, output) {
-            expect(error).to.be(null);
-            expect(output).to.be(
-                'var React = require(\'react\');\n\n' +
-                'module.exports = React.createClass({\n' +
-                '    displayName: "inputFilename",\n' +
-                '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<text style={{"fontFamily":"Verdana","fontSize":"25px"}} x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -157,7 +62,7 @@ describe('svg-jsx-loader', function() {
                 'import React from \'react\';\n\n' +
                 'export default class inputFilename extends React.Component {\n' +
                 '    render() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n\n' +
                 'inputFilename.displayName = "inputFilename";\n'
@@ -179,7 +84,7 @@ describe('svg-jsx-loader', function() {
                 'import React from \'react\';\n\n' +
                 'export default class myComponent extends React.Component {\n' +
                 '    render() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon fill="#C0272D" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n\n' +
                 'myComponent.displayName = "myComponent";\n'
@@ -189,11 +94,11 @@ describe('svg-jsx-loader', function() {
         });
     });
 
-    it('should convert use tags when replaceUseTags option is truthy', function(done) {
+    it('should pass passProps option to underlying convertor', function(done) {
         var executor = new utils.Executor(loader);
-        var input = utils.input('use');
+        var input = utils.input('simplest');
 
-        executor.query = '?replaceUseTags=true';
+        executor.query = '?passProps=false';
 
         executor.execute(input, function(error, output) {
             expect(error).to.be(null);
@@ -202,7 +107,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "inputFilename",\n' +
                 '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon points="497,129 537.1,135.3 494.4,215.8"/>\n\t<clippath id="path">\n\t\t<polygon points="497,129 537.1,135.3 494.4,215.8"/>\n\t</clippath>\n</svg>);\n' +
+                '        return (<svg version="1.1">\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -210,11 +115,11 @@ describe('svg-jsx-loader', function() {
         });
     });
 
-    it('should not convert use tags when replaceUseTags option is falsy', function(done) {
+    it('should pass root option to underlying convertor', function(done) {
         var executor = new utils.Executor(loader);
-        var input = utils.input('use');
+        var input = utils.input('root');
 
-        executor.query = '?replaceUseTags=false';
+        executor.query = '?root=root';
 
         executor.execute(input, function(error, output) {
             expect(error).to.be(null);
@@ -223,7 +128,28 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "inputFilename",\n' +
                 '    render: function() {\n' +
-                '        return (<svg {...this.props} version="1.1">\n\t<polygon id="Glue_mask" points="497,129 537.1,135.3 494.4,215.8"/>\n\t<clippath id="path"/>\n</svg>);\n' +
+                '        return (<text id="root" {...this.props}/>);\n' +
+                '    }\n});\n'
+            );
+
+            done();
+        });
+    });
+
+    it('should pass refs option to underlying convertor', function(done) {
+        var executor = new utils.Executor(loader);
+        var input = utils.input('root');
+
+        executor.query = '?{refs:{root:"myRef"}}';
+
+        executor.execute(input, function(error, output) {
+            expect(error).to.be(null);
+            expect(output).to.be(
+                'var React = require(\'react\');\n\n' +
+                'module.exports = React.createClass({\n' +
+                '    displayName: "inputFilename",\n' +
+                '    render: function() {\n' +
+                '        return (<svg version="1.1" {...this.props}>\n\t<text id="root" ref="myRef"/>\n</svg>);\n' +
                 '    }\n});\n'
             );
 

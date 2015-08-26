@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg">
-    <polygon id="Glue_mask" points="497,129 537.1,135.3 494.4,215.8"/>
-    <clipPath id="path">
-        <use xlink:href="#Glue_mask" overflow="visible"/>
-    </clipPath>
-</svg>
