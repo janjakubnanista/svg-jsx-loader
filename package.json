@@ -33,6 +33,6 @@
   "dependencies": {
     "loader-utils": "^0.2.11",
     "object-assign": "^4.0.1",
-    "svg-to-jsx": "0.0.4"
+    "svg-to-jsx": "0.0.13"
   }
 }
