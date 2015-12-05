@@ -1,6 +1,6 @@
 {
   "name": "svg-jsx-loader",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "WebPack loader that converts SVG files into React Components",
   "main": "index.js",
   "scripts": {
