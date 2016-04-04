@@ -13,18 +13,14 @@
 This loader outputs a React component. To use it for all of your `.svg` files you need to include it in your webpack [module.loaders](http://webpack.github.io/docs/configuration.html#module-loaders) configuration as follows.
 
 	loaders: [
-    	{ test: /\.svg$/, loaders: ['svg-jsx'] }
+    	{ test: /\.svg$/, loaders: ['babel?presets[]=react', 'svg-jsx'] }
     ]
 
-To use it for individual files:
+To use it for individual files: 
 
-	var MyComponent = require('svg-jsx!../svg/my_component.svg');
-
-In case you are using [ES6](#es6) variant, you have to chain a transpiler after this loader. I personally prefer [babel](https://babeljs.io/):
-
-    loaders: [
-    	{ test: /\.svg$/, loaders: ['babel', 'svg-jsx?es6=true'] }
-    ]
+	var MyComponent = require('babel?presets[]=react!svg-jsx!../svg/my_component.svg');
+	
+**In both cases `babel` with `react` preset is required to transpile resulting JSX.**
 
 ## Options
 
