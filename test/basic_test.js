@@ -21,7 +21,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "MyComponent",\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -42,7 +42,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: null,\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -62,7 +62,7 @@ describe('svg-jsx-loader', function() {
                 'import React from \'react\';\n\n' +
                 'export default class inputFilename extends React.Component {\n' +
                 '    render() {\n' +
-                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n\n' +
                 'inputFilename.displayName = "inputFilename";\n'
@@ -84,7 +84,7 @@ describe('svg-jsx-loader', function() {
                 'import React from \'react\';\n\n' +
                 'export default class myComponent extends React.Component {\n' +
                 '    render() {\n' +
-                '        return (<svg version="1.1" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n\n' +
                 'myComponent.displayName = "myComponent";\n'
@@ -107,7 +107,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "inputFilename",\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1">\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg">\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
@@ -149,7 +149,7 @@ describe('svg-jsx-loader', function() {
                 'module.exports = React.createClass({\n' +
                 '    displayName: "inputFilename",\n' +
                 '    render: function() {\n' +
-                '        return (<svg version="1.1" {...this.props}>\n\t<text id="root" ref="myRef"/>\n</svg>);\n' +
+                '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text id="root" ref="myRef"/>\n</svg>);\n' +
                 '    }\n});\n'
             );
 
