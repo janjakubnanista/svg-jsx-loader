@@ -7,10 +7,15 @@ var path = require('path');
 var assign = require('object-assign');
 var utils = require('./utils');
 
-function buildComponent(svg, options) {
-    var type = options.es6 ? 'es6' : 'es5';
+function getTemplate(options) {
+    var type = options.es6 ? 'es6.' + (options.memo ? 'memo' : 'pure') : 'es5';
     var templateFilename = path.resolve(__dirname, 'templates', type) + '.js.tpl';
-    var template = fs.readFileSync(templateFilename).toString('utf8');
+
+    return fs.readFileSync(templateFilename).toString('utf8');
+}
+
+function buildComponent(svg, options) {
+    var template = getTemplate(options);
 
     return template
         .replace(/{SVG}/g, svg)

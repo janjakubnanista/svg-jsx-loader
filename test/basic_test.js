@@ -50,7 +50,7 @@ describe('svg-jsx-loader', function() {
         });
     });
 
-    it('should use ES6 template if es6 query option is truthy', function(done) {
+    it('should use ES6 pure template if es6 query option is truthy and memo query option is falsy', function(done) {
         var executor = new utils.Executor(loader);
         var input = utils.input('simplest');
 
@@ -60,7 +60,7 @@ describe('svg-jsx-loader', function() {
             expect(error).to.be(null);
             expect(output).to.be(
                 'import React from \'react\';\n\n' +
-                'export default class inputFilename extends React.Component {\n' +
+                'export default class inputFilename extends React.PureComponent {\n' +
                 '    render() {\n' +
                 '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
@@ -82,12 +82,29 @@ describe('svg-jsx-loader', function() {
             expect(error).to.be(null);
             expect(output).to.be(
                 'import React from \'react\';\n\n' +
-                'export default class myComponent extends React.Component {\n' +
+                'export default class myComponent extends React.PureComponent {\n' +
                 '    render() {\n' +
                 '        return (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>);\n' +
                 '    }\n' +
                 '};\n\n' +
                 'myComponent.displayName = "myComponent";\n'
+            );
+
+            done();
+        });
+    });
+
+    it('should use ES6 memo template if es6 query option is truthy and memo query option is truthy', function(done) {
+        var executor = new utils.Executor(loader);
+        var input = utils.input('simplest');
+
+        executor.query = '?es6=true&memo=true';
+
+        executor.execute(input, function(error, output) {
+            expect(error).to.be(null);
+            expect(output).to.be(
+                'import React from \'react\';\n\n' +
+                'export const inputFilename = React.memo(() => (<svg version="1.1" xmlns="http://www.w3.org/2000/svg" {...this.props}>\n\t<text fontFamily="Verdana" fontSize="55" x="250" y="150">Hello, out there</text>\n</svg>));\n'
             );
 
             done();
