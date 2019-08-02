@@ -4,7 +4,8 @@
   "description": "WebPack loader that converts SVG files into React Components",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*_test.js"
+    "test": "mocha test/*_test.js",
+    "test:watch": "mocha test/*_test.js --watch"
   },
   "repository": {
     "type": "git",
@@ -24,15 +25,15 @@
   },
   "homepage": "https://github.com/janjakubnanista/svg-jsx-loader",
   "devDependencies": {
-    "babel-core": "^5.8.22",
-    "babel-eslint": "^4.0.10",
-    "eslint": "^1.2.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.1.0",
     "expect.js": "^0.3.1",
-    "mocha": "^2.2.5"
+    "mocha": "^6.2.0"
   },
   "dependencies": {
-    "loader-utils": "^0.2.11",
-    "object-assign": "^4.0.1",
-    "svg-to-jsx": "~1.0.0"
+    "loader-utils": "^1.2.3",
+    "object-assign": "^4.1.1",
+    "svg-to-jsx": "~1.0.2"
   }
 }
