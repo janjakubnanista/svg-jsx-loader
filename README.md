@@ -16,10 +16,10 @@ This loader outputs a React component. To use it for all of your `.svg` files yo
     	{ test: /\.svg$/, loaders: ['babel?presets[]=react', 'svg-jsx'] }
     ]
 
-To use it for individual files: 
+To use it for individual files:
 
 	var MyComponent = require('babel?presets[]=react!svg-jsx!../svg/my_component.svg');
-	
+
 **In both cases `babel` with `react` preset is required to transpile resulting JSX.**
 
 ## Options
@@ -28,7 +28,9 @@ Besides options that are passed to underlying [`svg-to-jsx` module](https://gith
 
 <a name="es6"></a> `es6` *{Boolean}* Use ES6 compatible JavaScript syntax for component class. Defaults to `false`.
 
-`displayName` *{String}* `displayName` of generated class. Defaults to `null`.
+<a name="memo"></a> `memo` *{Boolean}* **Only available when es6 option is set to true** Use `React.memo` instead of `React.PureComponent`. Defaults to `false`.
+
+<a name="displayName"></a> `displayName` *{String}* `displayName` of generated class. Defaults to `null`.
 
 ## Acknowledgements
 
